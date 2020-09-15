@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:mysql://rm-uf65rx9fbin5ff216xo.mysql.rds.aliyuncs.com:3306/general
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+---
+
+spring:
+  profiles: DEV
+  datasource:
+    url: jdbc:mysql://rm-uf65rx9fbin5ff21690130.mysql.rds.aliyuncs.com:3306/general
