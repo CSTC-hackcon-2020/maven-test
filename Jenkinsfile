@@ -17,8 +17,10 @@ pipeline{
         stage('Initialize'){
           steps{
             container("maven") {
-                env.IMAGE_TAG =  sh(returnStdout: true,script: 'echo $BRANCH_NAME-$BUILD_NUMBER').trim()
-                sh "echo $IMAGE_TAG"
+                script{
+                  env.IMAGE_TAG =  sh(returnStdout: true,script: 'echo $BRANCH_NAME-$BUILD_NUMBER').trim()
+                  sh "echo $IMAGE_TAG"
+                }
             }
           }
         }
