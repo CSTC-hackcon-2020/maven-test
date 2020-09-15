@@ -3,7 +3,6 @@ pipeline{
       environment{
         ORIGIN_REPO =  'registry-vpc.cn-shanghai.aliyuncs.com/hackathonxx'
         IMAGE =  'maven-test'
-        IMAGE_TAG =  sh(returnStdout: true,script: 'echo $branch-$buildnumber').trim()
         CLUSTER = 'https://kubernetes.default.svc.cluster.local:443'
       }
 
@@ -14,6 +13,15 @@ pipeline{
       }
 
       stages{
+
+        stage('Initialize'){
+          steps{
+            container("maven") {
+                env.IMAGE_TAG =  sh(returnStdout: true,script: 'echo $BRANCH_NAME-$BUILD_NUMBER').trim()
+                sh "echo $IMAGE_TAG"
+            }
+          }
+        }
 
         stage('Package'){
           steps{
